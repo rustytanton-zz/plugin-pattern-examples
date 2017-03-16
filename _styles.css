@@ -1,0 +1,38 @@
+body {
+  font-size: 1.1em;
+  font-family: sans-serif;
+}
+h1 {
+  text-align: center;
+}
+code {
+  background: #eee;
+  border: 1px #666 solid;
+  display: block;
+  margin: 0 auto;
+  padding: 20px;
+  white-space:pre-wrap;
+}
+figure {
+  margin: 0 auto;
+}
+header, section {
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+section code {
+  text-align: left;
+}
+
+@media screen and (min-width: 768px) {
+  figure {
+    max-width: 75%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  figure {
+    max-width: 50%;
+  }
+}
