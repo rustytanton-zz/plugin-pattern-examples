@@ -5,6 +5,7 @@ Examples in this repo reimagine ways to instantiate Brightspot plugins and are i
 
 ## Examples Scope
 The PSD FE team agreed on some universal needs for a future Brightspot plugin pattern:
+
     * Auto-instantiation via native or vanilla JS method, i.e. do not require a library such as jQuery  to instantiate a plugin
     * Ability to pass options from Brightspot back end into the front end module
     * Reduced boilerplate code vs. what is written now
