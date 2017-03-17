@@ -18,12 +18,13 @@ Some of these examples imagine plugins instantiated by [Web Components](https://
 ### Advantages
 
 * Eventually will provide a native, web standard browser method to auto instantiate plugins on DOM elements, which will work in practice much as Brightspot JS plugins are instantiated on DOM elements with data attributes now
+* Should be much more performant when native support materializes
 * Can optionally use Shadow DOM to allow a presentation to be further separated from content, i.e. the "light DOM" written to the page can be heavily-optimized for SEO, [schema.org](http://schema.org/), screen readers, etc. and the display HTML can do whatever ugly things it needs to do to make a UI work
-* Can optionally isolate scope of CSS and Javscript to the component
+* Can optionally isolate scope of CSS and Javascript to the component
 * Would make components much more portable and self-contained than they are now
 
 ### Disadvantages
 
 * Still only supported with a polyfill in most browsers
-* Support for HTML imports (which makes using web components much nicer) is on hold indefinitely in Firefox, as the Firefox team wants to see how HTML imports vs. ES6+ module loader standards will evolve before comitting to native support for either.
+* Support for HTML imports (which makes using web components much nicer) is on hold indefinitely in Firefox, as the Firefox team wants to see how HTML imports vs. ES6+ module loader standards will evolve before committing to native support for either. We would want to avoid using this feature initially.
 * Doesn't work at all in IE8, even with a polyfill, if that's something we care about
