@@ -7,7 +7,7 @@ Examples in this repo reimagine ways to instantiate Brightspot plugins and are i
 The PSD FE team agreed on some universal needs for a future Brightspot plugin pattern:
 
 * Auto-instantiation via native or vanilla JS method, i.e. do not require a library such as jQuery  to instantiate a plugin
-* Ability to pass options from Brightspot back end into the front end module
+* Ability to pass options from Brightspot back end into the front end module. These options should be set on (or stay in sync with) attributes on the DOM element. Would expose some options as attributes on the element.
 * Reduced boilerplate code vs. what is written now
 * Many wishlist items named (event handling, element caching, etc.) are not in scope here. This exercise stops when the element has auto-instantiated a plugin through a DOM element and passed the element and options to the Javascript side of the plugin.
 
