@@ -85,3 +85,30 @@ This is a hybrid of the old way of doing things and Method 2.
 ### Disadvantages
 
 *   Still not aesthetically pleasing, though not as bad as Method 2
+
+## Javascript options/settings
+
+With method 1, the most straightforward way to access settings in Javascript would be to simply access `element.attributes` and don't bother with any validation/checks. Leave that to individual plugins. That wouldn't
+
+It would also be possible with other options to move all validation/function description into a class with decorators, so if you passed options like this:
+
+    <div data-option-1='some text' data-option-2='3' data-option-3='true'>
+      ... some mark-up ...
+    </div>
+
+You could write a JS class like this to validate settings:
+
+    // assuming BspModule has shared functionality for option
+    // management in all plugins
+    class MyModule extends BspModule {
+      @string @required @attribute
+      option1
+
+      @number
+      option2
+
+      @boolean
+      option3
+    }
+
+This is the most aesthetically pleasing (to me) and is more flexible than other options, but you have to do more work for smaller plugins.
