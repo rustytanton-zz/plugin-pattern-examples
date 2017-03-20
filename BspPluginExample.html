@@ -20,7 +20,7 @@
           bsp_utils.plugin(false, 'my', 'plugin', {
             '_each': function () {
               var plugin = Object.create({
-                init () {
+                init: function () {
                   self.testDone()
                 }
               })
@@ -31,7 +31,7 @@
         test: function () {
           var div = document.createElement('div')
           div.setAttribute(pluginAttr, '')
-          output.append(div)
+          output.appendChild(div)
         },
         done: function () {
           var result = document.getElementById('result')
