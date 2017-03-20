@@ -1,9 +1,0 @@
-{
-  "name": "plugin-pattern-examples",
-  "version": "0.0.1",
-  "dependencies": {
-    "@webcomponents/custom-elements": "^1.0.0-alpha.3",
-    "jquery": "^3.2.0",
-    "usertiming": "^0.1.8"
-  }
-}
