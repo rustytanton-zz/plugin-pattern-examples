@@ -78,4 +78,10 @@ Below is a table with results from when these tests were run in various browsers
 | ----------------- | --------- | ----------------- | -------------- |
 | Chrome 57/Mac     | 0.065 sec | 0.015 sec         | 0.017 sec      |
 | Firefox 52/Mac    | 0.106 sec | 0.005 sec         | 0.025 sec      |
-| Safari/Mac        | 0.060 sec | 0.003 sec         | 0.016 sec      |
+| Safari 10/Mac     | 0.060 sec | 0.003 sec         | 0.016 sec      |
+
+## Decision Points
+
+*   Are benefits of Custom Elements (Light DOM/Shadow DOM, portability, etc) worth the marginal performance penalty and incompatibility with IE8?
+*   If no, should we refactor the existing BSP Plugin to use a standalone Mutation Observer without jQuery or create something new inside Brightspot Express?
+*   If we are assuming we no longer expect plugin options to be passed as a single JSON blob, should any option management happen at all at the plugin level? Or should that be left to the modules?
