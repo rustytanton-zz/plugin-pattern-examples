@@ -67,8 +67,8 @@ These are not the only ways to load plugins, but these are a couple included in 
 Included in this repo are three HTML files used to measure performance with the [User Timing API](https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API):
 
 *    [BspPluginExample.html](BspPluginExample.html) - tests performance of existing pattern
-*    [MutationObserverExample.html](BspPluginExample.html) - tests performance of a standalone mutation observer
-*    [CustomElementExample.html](BspPluginExample.html) - tests performance of a custom element
+*    [MutationObserverExample.html](MutationObserverExample.html) - tests performance of a standalone mutation observer
+*    [CustomElementExample.html](CustomElementExample.html) - tests performance of a custom element
 
 Below is a table with results from when these tests were run in various browsers/platforms:
 
