@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Elements Example</title>
+    <!-- polyfills -->
+    <script src="node_modules/usertiming/src/usertiming.js"></script>
+    <script src="node_modules/@webcomponents/custom-elements/src/custom-elements.js"></script>
+    
+    <script src="perftest.js"></script>
+  </head>
+  <body>
+    <div id="output"></div>
+    <div id="result"></div>
+    <script>
+      var output = document.getElementById('output')
+      var pluginElName = 'my-plugin'
+      var p = Object.create(perftest)
+      p.run({
+        setup () {
+          var self = this
+          customElements.define(pluginElName, class extends HTMLElement {
+            connectedCallback () {
+              self.testDone()
+            }
+          })
+        },
+        test () {
+          var el = document.createElement(pluginElName)
+          output.append(el)
+        },
+        done () {
+          var result = document.getElementById('result')
+          result.innerHTML = 'created ' + this.total + ' elements with <strong>custom elements</strong> in ' + this.result().toFixed(3) + ' seconds'
+        }
+      })
+    </script>
+  </body>
+</html>

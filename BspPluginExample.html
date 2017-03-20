@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BSP Plugin Example</title>
+    <!-- polyfills -->
+    <script src="node_modules/usertiming/src/usertiming.js"></script>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="bsp-utils.js"></script>
+    <script src="perftest.js"></script>
+  </head>
+  <body>
+    <div id="output"></div>
+    <div id="result"></div>
+    <script>
+      var output = document.getElementById('output')
+      var pluginAttr = 'data-my-plugin'
+      var p = Object.create(perftest)
+      p.run({
+        setup () {
+          var self = this
+          bsp_utils.plugin(false, 'my', 'plugin', {
+            '_each': function () {
+              var plugin = Object.create({
+                init () {
+                  self.testDone()
+                }
+              })
+              plugin.init()
+            }
+          })
+        },
+        test () {
+          var div = document.createElement('div')
+          div.setAttribute(pluginAttr, '')
+          output.append(div)
+        },
+        done () {
+          var result = document.getElementById('result')
+          result.innerHTML = 'created ' + this.total + ' elements with <strong>bsp-plugin</strong> in ' + this.result().toFixed(3) + ' seconds'
+        }
+      })
+    </script>
+  </body>
+</html>

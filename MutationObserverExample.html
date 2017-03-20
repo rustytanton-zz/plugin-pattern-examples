@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mutation Observer Example</title>
+    <!-- polyfills -->
+    <script src="node_modules/usertiming/src/usertiming.js"></script>
+
+    <script src="perftest.js"></script>
+  </head>
+  <body>
+    <div id="output"></div>
+    <div id="result"></div>
+    <script>
+      var output = document.getElementById('output')
+      var pluginAttr = 'data-my-plugin'
+      var p = Object.create(perftest)
+      p.run({
+        setup () {
+          var self = this
+          var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+              if (mutation.addedNodes[0].hasAttribute(pluginAttr)) {
+                self.testDone()
+              }
+            })
+          })
+          observer.observe(output, { childList: true })
+        },
+        test () {
+          var div = document.createElement('div')
+          div.setAttribute(pluginAttr, '')
+          output.append(div)
+        },
+        done () {
+          var result = document.getElementById('result')
+          result.innerHTML = 'created ' + this.total + ' elements with <strong>a mutation observer</strong> in ' + this.result().toFixed(3) + ' seconds'
+        }
+      })
+    </script>
+  </body>
+</html>
