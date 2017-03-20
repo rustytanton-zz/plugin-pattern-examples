@@ -13,7 +13,7 @@
       var pluginAttr = 'data-my-plugin'
       var p = Object.create(perftest)
       p.run({
-        setup () {
+        setup: function () {
           var self = this
           var observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
@@ -24,12 +24,12 @@
           })
           observer.observe(output, { childList: true })
         },
-        test () {
+        test: function () {
           var div = document.createElement('div')
           div.setAttribute(pluginAttr, '')
           output.append(div)
         },
-        done () {
+        done: function () {
           var result = document.getElementById('result')
           result.innerHTML = 'created ' + this.total + ' elements with <strong>a mutation observer</strong> in ' + this.result().toFixed(3) + ' seconds'
         }

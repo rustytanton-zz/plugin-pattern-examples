@@ -15,7 +15,7 @@
       var pluginAttr = 'data-my-plugin'
       var p = Object.create(perftest)
       p.run({
-        setup () {
+        setup: function () {
           var self = this
           bsp_utils.plugin(false, 'my', 'plugin', {
             '_each': function () {
@@ -28,12 +28,12 @@
             }
           })
         },
-        test () {
+        test: function () {
           var div = document.createElement('div')
           div.setAttribute(pluginAttr, '')
           output.append(div)
         },
-        done () {
+        done: function () {
           var result = document.getElementById('result')
           result.innerHTML = 'created ' + this.total + ' elements with <strong>bsp-plugin</strong> in ' + this.result().toFixed(3) + ' seconds'
         }

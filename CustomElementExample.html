@@ -13,7 +13,7 @@
       var pluginElName = 'my-plugin'
       var p = Object.create(perftest)
       p.run({
-        setup () {
+        setup: function () {
           var self = this
           customElements.define(pluginElName, class extends HTMLElement {
             connectedCallback () {
@@ -21,11 +21,11 @@
             }
           })
         },
-        test () {
+        test: function () {
           var el = document.createElement(pluginElName)
           output.append(el)
         },
-        done () {
+        done: function () {
           var result = document.getElementById('result')
           result.innerHTML = 'created ' + this.total + ' elements with <strong>custom elements</strong> in ' + this.result().toFixed(3) + ' seconds'
         }
