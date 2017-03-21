@@ -1,7 +1,1 @@
-# blacklist node_modules by default
-**/node_modules/**/*
-
-# whitelist a few files so this will work on github pages
-!node_modules/jquery/dist/jquery.min.js
-!node_modules/@webcomponents/custom-elements/src/custom-elements.js
-!node_modules/usertiming/src/usertiming.js
+node_modules

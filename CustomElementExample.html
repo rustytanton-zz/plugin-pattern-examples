@@ -2,36 +2,14 @@
 <html>
   <head>
     <title>Custom Elements Example</title>
-    <script src="lib/custom-elements/src/native-shim.js"></script>
-    <script src="lib/custom-elements/custom-elements.min.js"></script>
+    <script src="lib/es6-shim.js"></script>
+    <script src="lib/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="lib/usertiming.js"></script>
     <script src="lib/perftest.js"></script>
   </head>
   <body>
     <div id="output"></div>
     <div id="result"></div>
-    <script>
-      var output = document.getElementById('output')
-      var pluginElName = 'my-plugin'
-      var p = Object.create(perftest)
-      p.run({
-        setup: function () {
-          var self = this
-          customElements.define(pluginElName, class extends HTMLElement {
-            connectedCallback () {
-              self.testDone()
-            }
-          })
-        },
-        test: function () {
-          var el = document.createElement(pluginElName)
-          output.appendChild(el)
-        },
-        done: function () {
-          var result = document.getElementById('result')
-          result.innerHTML = 'created ' + this.total + ' elements with <strong>custom elements</strong> in ' + this.result().toFixed(3) + ' seconds'
-        }
-      })
-    </script>
+    <script src="dist/custom-element-test.js"></script>
   </body>
 </html>

@@ -80,9 +80,7 @@ Below is a table with results from when these tests were run in various browsers
 | Firefox 52/Mac         | 0.106 sec | 0.005 sec         | 0.025 sec      |
 | Safari 10/Mac          | 0.060 sec | 0.002 sec         | 0.016 sec      |
 | Safari 10/iOS          | 0.079 sec | 0.004 sec         | 0.02 sec       |
-| IE11 (Win7/VirtualBox) | n/a       | n/a               | n/a            |
-
-To-do: fix IE 11 issues
+| IE11 (Win7/VirtualBox) | 2.473 sec | 0.024 sec         | 0.213 sec      |
 
 ## Decision Points
 
