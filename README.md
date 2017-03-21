@@ -78,11 +78,11 @@ Below is a table with results from when these tests were run in various browsers
 | ---------------------- | --------- | ----------------- | -------------- |
 | Chrome 57/Mac          | 0.065 sec | 0.015 sec         | 0.017 sec      |
 | Firefox 52/Mac         | 0.106 sec | 0.005 sec         | 0.025 sec      |
-| Safari 10/Mac          | 0.060 sec | 0.003 sec         | 0.016 sec      |
-| Safari 10/iOS          | 0.085 sec | 0.01 sec          | n/a            |
+| Safari 10/Mac          | 0.060 sec | 0.002 sec         | 0.016 sec      |
+| Safari 10/iOS          | 0.079 sec | 0.004 sec         | 0.02 sec       |
 | IE11 (Win7/VirtualBox) | n/a       | n/a               | n/a            |
 
-To-do: fix Mobile Safari custom elements issue, IE 11 issues
+To-do: fix IE 11 issues
 
 ## Decision Points
 
