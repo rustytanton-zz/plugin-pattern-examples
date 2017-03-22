@@ -82,6 +82,8 @@ Below is a table with results from when these tests were run in various browsers
 | Safari 10/iOS          | 0.079 sec | 0.004 sec         | 0.02 sec       |
 | IE11 (Win7/VirtualBox) | 2.473 sec | 0.024 sec         | 0.213 sec      |
 
+The custom elements test is not working in IE9/IE10 at the moment, though it should be possible to get it working.
+
 ## Decision Points
 
 *   Are benefits of Custom Elements (Light DOM/Shadow DOM, portability, etc) worth the marginal performance penalty and incompatibility with IE8?
