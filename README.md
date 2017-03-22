@@ -42,7 +42,7 @@ The JS will then instantiate the module on `$(document).ready` or when nodes are
 
 *   As browsers have adopted industry standards more consistently (ex: `document.querySelector`), it has become less desirable to assume that all projects will need [jQuery](https://jquery.com/) loaded by default since native methods are demonstrably more performant and not much more verbose/difficult to write than jQuery methods
 *   Plugin loading boilerplate is unnecessarily verbose
-*   It is not clear why it is necessary to always wait until `$(document).ready` to run module init code, as this is another drag on performance in most cases
+*   It is not clear why it is necessary to always wait until `$(document).ready` to run module init code, as this is a drag on performance when it isn't necessary
 *   Passing options as one large JSON blob does not save any work on the back end and creates more work on the front end when attributes need to be exposed individually on the DOM element for styling purposes
 
 ## Assumptions/requirements for a new pattern
@@ -98,7 +98,6 @@ Another potentially useful feature of custom elements is to provide an extra lay
       <img src="janedoe.jpg" itemprop="image" alt="Jane Doe" slot="image" />
       <div itemprop="name">Jane Doe</span>
       <div itemprop="jobTitle" slot="job">Software Developer</job>
-      <div slot="email">
     </my-bio-element>
 
     <!-- the shadow DOM is only concerned with rendering -->
@@ -146,13 +145,13 @@ Below is a table with results from when these tests were run in various browsers
 
 ### Test: Render 10,000 elements
 
-| Method                 | BspPlugin | Mutation Observer | Custom Element |
-| ---------------------- | --------- | ----------------- | -------------- |
-| Chrome 57/Mac          | 0.065 sec | 0.005 sec         | 0.017 sec      |
-| Firefox 52/Mac         | 0.106 sec | 0.005 sec         | 0.025 sec      |
-| Safari 10/Mac          | 0.060 sec | 0.002 sec         | 0.016 sec      |
-| Safari 10/iOS          | 0.079 sec | 0.004 sec         | 0.02 sec       |
-| IE11 (Win7/VirtualBox) | 2.473 sec | 0.024 sec         | 0.213 sec      |
+| Method                 | BspPlugin | Mutation Observer | vs. BspPlugin | Custom Element | vs. BspPlugin |
+| ---------------------- | --------- | ----------------- | ------------- | -------------- | ------------- |
+| Chrome 57/Mac          | 0.065 sec | 0.005 sec         | 13x faster    | 0.017 sec      | 4x faster     |
+| Firefox 52/Mac         | 0.106 sec | 0.005 sec         | 21x faster    | 0.025 sec      | 4x faster     |
+| Safari 10/Mac          | 0.060 sec | 0.002 sec         | 30x faster    | 0.016 sec      | 4x faster     |
+| Safari 10/iOS          | 0.079 sec | 0.004 sec         | 20x faster    | 0.02 sec       | 4x faster     |
+| IE11 (Win7/VirtualBox) | 1.123 sec | 0.012 sec         | 94x faster    | 0.135 sec      | 8x faster     |
 
 The custom elements test is not working in IE9/IE10 at the moment, though it should be possible to get it working.
 
