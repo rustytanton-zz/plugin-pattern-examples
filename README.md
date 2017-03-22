@@ -60,7 +60,79 @@ These are not the only ways to load plugins, but these are a couple included in 
 
 1.    Standalone mutation observers that look for data attributes on DOM elements. bspUtils uses mutation observers now, but routes them through a jQuery `document.ready` call which degrades performance.
 
-2.    [Custom elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements). This is an emerging web standard that is designed to build self-contained modules like we build in Brightspot.
+2.    [Custom elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements). This is an emerging web standard that is designed to build self-contained modules like we build in Brightspot. (see example in next section)
+
+## Custom elements example
+
+You can define a custom element in Javascript like this:
+
+    class MyElement extends HTMLElement {
+      constructor () {
+        // called when the element is created
+      }
+      connectedCallback () {
+        // do stuff when inserted in DOM
+      }
+      disconnectedCallback () {
+        // do stuff when element is removed from the DOM
+      }
+      attributeChangedCallback () {
+        // do stuff when an attribute on the element changes
+      }
+      adoptedCallback () {
+        // do stuff when the element is adopted into a new document
+      }
+    }
+    customElements.define('my-element', MyElement)
+
+Then you can insert into the DOM like this:
+
+    <my-element></my-element>
+
+### Templates + Light DOM / Shadow DOM
+
+Another potentially useful feature of custom elements is to provide an extra layer of separation between data structure and presentation.
+
+    <!-- the light DOM is only concerned with accessibility/SEO -->
+    <my-bio-element itemscope itemtype="http://schema.org/Person">
+      <img src="janedoe.jpg" itemprop="image" alt="Jane Doe" slot="image" />
+      <div itemprop="name">Jane Doe</span>
+      <div itemprop="jobTitle" slot="job">Software Developer</job>
+      <div slot="email">
+    </my-bio-element>
+
+    <!-- the shadow DOM is only concerned with rendering -->
+    <template id="bio-template-1">
+      <style>
+      .bio1 {
+        border: 1px #666 solid;
+        display: none;
+        padding: 10px;
+      }
+      .bio1.ready {
+        display: block;
+      }
+      .bio1-nameAndTitle {
+        text-transform: uppercase;
+      }
+      </style>
+      <div class="bio1">
+        <h3 class="bio1-nameAndTitle"><slot name="name"></slot>: <slot name="title"></slot></h3>
+      </div>
+      <script>
+        document.querySelector('.bio1')[0].className = 'bio1 ready'
+      </script>
+    </template>
+
+A single data structure could be rendered with multiple templates this way. Optionally, Javascript and CSS can be isolated to the Shadow DOM to make components even more self-contained.
+
+Github uses [custom elements](https://github.com/github/time-elements) to extend the `<time>` element, which are good real-world examples of using Shadow DOM.
+
+    <relative-time datetime="2014-04-01T16:30:00-08:00">
+      April 1, 2014
+    </relative-time>
+
+If it were April 2, the Shadow DOM would render as "1 day ago" while search engines always see April 1, 2014.
 
 ## Performance
 
@@ -76,7 +148,7 @@ Below is a table with results from when these tests were run in various browsers
 
 | Method                 | BspPlugin | Mutation Observer | Custom Element |
 | ---------------------- | --------- | ----------------- | -------------- |
-| Chrome 57/Mac          | 0.065 sec | 0.015 sec         | 0.017 sec      |
+| Chrome 57/Mac          | 0.065 sec | 0.005 sec         | 0.017 sec      |
 | Firefox 52/Mac         | 0.106 sec | 0.005 sec         | 0.025 sec      |
 | Safari 10/Mac          | 0.060 sec | 0.002 sec         | 0.016 sec      |
 | Safari 10/iOS          | 0.079 sec | 0.004 sec         | 0.02 sec       |
@@ -86,6 +158,7 @@ The custom elements test is not working in IE9/IE10 at the moment, though it sho
 
 ## Decision Points
 
-*   Are benefits of Custom Elements (Light DOM/Shadow DOM, portability, etc) worth the marginal performance penalty and incompatibility with IE8?
-*   If no, should we refactor the existing BSP Plugin to use a standalone Mutation Observer without jQuery or create something new inside Brightspot Express?
+*   Are benefits of Custom Elements (Light DOM/Shadow DOM, isolated JS/CSS, portability, etc) worth the marginal performance penalty vs. a Mutation Observer and incompatibility with IE8?
 *   If we are assuming we no longer expect plugin options to be passed as a single JSON blob, should any option management happen at all at the plugin level? Or should that be left to the modules?
+*   If not using custom elements, should we refactor the existing BSP Plugin to use a standalone Mutation Observer without jQuery or create something new inside Brightspot Express?
+*   If not using custom elements, is there any value to making all plugins wait until `document.ready` to load instead of handling that inside individual modules when explicitly necessary?
