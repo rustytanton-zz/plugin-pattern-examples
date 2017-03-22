@@ -10,5 +10,8 @@
     "gulp-rename": "^1.2.2",
     "npm": "^4.4.1",
     "webpack": "^2.2.1"
+  },
+  "scripts" : {
+    "build" : "node ./node_modules/webpack/bin/webpack.js"
   }
 }
